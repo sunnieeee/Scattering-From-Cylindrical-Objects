@@ -38,7 +38,7 @@ sigmam=np.zeros((lx,ly))
 #散射物体的位置与大小
 x0=int(lx*3/5)
 y0=int(ly*3/5)
-r=8 #6格
+r=6 #散射圆柱体半径
 #定义散射体内的介电常数
 for i in range(0,lx):
     for j in range(0,ly):
@@ -83,9 +83,7 @@ Ezs1=np.zeros((lx,ly))
 Ezs2=np.zeros((lx,ly))
 
 #画图需要的mesh
-X=np.arange(0,lx*dx,dx)
-Y=np.arange(0,ly*dy,dy)
-X, Y = np.meshgrid(X, Y)
+
 #入射场原点的位置
 xx=int(lx/2)        
 yy=int(ly/2)
@@ -112,7 +110,7 @@ for i in range(0,lt-1):     #时间loop
     
     for j in range(0,lx-1):
         for k in range(0,ly-1):         #散射场H
-            if (lxx/2<j<lx-lxx/2)and(lyy/2<k<ly-lyy/2):
+            if (lxx/2<j<lx-lxx/2)and(lyy/2<k<ly-lyy/2):     #这个alpha的引入是为了在pml内去掉下方👇迭代式中入射场Hy,Hx的影响
                 alpha=1
             else:
                 alpha=0
@@ -125,7 +123,7 @@ for i in range(0,lt-1):     #时间loop
 
     for j in range(0,lx-1):
         for k in range(0,ly-1):    #Ez的更新（散射场）
-            if (lxx/2<j<lx-lxx/2)and(lyy/2<k<ly-lyy/2):
+            if (lxx/2<j<lx-lxx/2)and(lyy/2<k<ly-lyy/2):     #这个alpha同理
                 alpha=1
             else:
                 alpha=0
