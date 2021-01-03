@@ -55,7 +55,7 @@ mu2[:,:]=mu0
 ep2[:,:]=ep0
 for i in range(0,lx):
     for j in range(0,ly):
-        if (i-x0)**2+(j-y0)**2<=r*r:    #散射物体的参数（只考虑散射场的）
+        if (i-x0)**2+(j-y0)**2<=r*r:    #散射物体的参数（只考虑散射场的）在这里改变物体的光学参数！！！！
             mu2[i,j]=2
             ep2[i,j]=10
             sigma2[i,j]=20
@@ -161,7 +161,9 @@ plt.title('scattered field')
 plt.subplot(2,2,3)
 plt.imshow(np.log((Ez2[int(lxx/2):lx-int(lxx/2),int(lyy/2):ly-int(lyy/2)])**2),cmap='gray_r',vmin=-13, vmax=0)
 plt.title('incident field')        #plt.imshow(np.log((Ez2)**2),cmap='gray_r',vmin=-6, vmax=0) #限定cbar的范围
-        
+plt.subplot(2,2,4)
+plt.imshow((ep2[int(lxx/2):lx-int(lxx/2),int(lyy/2):ly-int(lyy/2)])**2,cmap='gray_r')
+plt.title('scatter object')          
 plt.colorbar()
 
 end_time = time.time()
